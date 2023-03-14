@@ -58,6 +58,18 @@ export default function Create() {
       toast.error(<b>Enter a valid poll question!</b>)
       return
     }
+
+    if (options.length > 0) {
+      const duplicate = options.map((item) => item.trim())
+
+      const check = duplicate.filter((currentValue, currentIndex) =>
+        options.indexOf(currentValue) !== currentIndex)
+
+      if (check.length) {
+        toast.error(<b>Options must be unique!</b>)
+        return
+      }
+    }
     setIsCreating(true)
     const id = toast.loading(<b>Creating Poll Please Wait</b>)
     try {
